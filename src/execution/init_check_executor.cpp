@@ -20,21 +20,21 @@ InitCheckExecutor::InitCheckExecutor(ExecutorContext *exec_ctx, AbstractPlanNode
     : AbstractExecutor{exec_ctx}, plan_{std::move(plan)}, child_executor_{std::move(child_executor)} {}
 
 void InitCheckExecutor::Init() {
-  if (!child_executor_) {
-    return;
-  }
-  n_init_++;
-  // Initialize the child executor
-  child_executor_->Init();
+    if (!child_executor_) {
+        return;
+    }
+    n_init_++;
+    // Initialize the child executor
+    child_executor_->Init();
 }
 
 auto InitCheckExecutor::Next(Tuple *tuple, RID *rid) -> bool {
-  // Emit the next tuple
-  auto result = child_executor_->Next(tuple, rid);
-  if (result) {
-    n_next_++;
-  }
-  return result;
+    // Emit the next tuple
+    auto result = child_executor_->Next(tuple, rid);
+    if (result) {
+        n_next_++;
+    }
+    return result;
 }
 
 }  // namespace bustub

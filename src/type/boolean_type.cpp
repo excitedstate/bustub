@@ -21,95 +21,95 @@ namespace bustub {
 BooleanType::BooleanType() : Type(TypeId::BOOLEAN) {}
 
 auto BooleanType::CompareEquals(const Value &left, const Value &right) const -> CmpBool {
-  assert(GetTypeId() == TypeId::BOOLEAN);
-  assert(left.CheckComparable(right));
-  if (left.IsNull() || right.IsNull()) {
-    return CmpBool::CmpNull;
-  }
-  return BOOLEAN_COMPARE_FUNC(==);  // NOLINT
+    assert(GetTypeId() == TypeId::BOOLEAN);
+    assert(left.CheckComparable(right));
+    if (left.IsNull() || right.IsNull()) {
+        return CmpBool::CmpNull;
+    }
+    return BOOLEAN_COMPARE_FUNC(==);  // NOLINT
 }
 
 auto BooleanType::CompareNotEquals(const Value &left, const Value &right) const -> CmpBool {
-  assert(GetTypeId() == TypeId::BOOLEAN);
-  assert(left.CheckComparable(right));
-  if (left.IsNull() || right.IsNull()) {
-    return CmpBool::CmpNull;
-  }
-  return BOOLEAN_COMPARE_FUNC(!=);  // NOLINT
+    assert(GetTypeId() == TypeId::BOOLEAN);
+    assert(left.CheckComparable(right));
+    if (left.IsNull() || right.IsNull()) {
+        return CmpBool::CmpNull;
+    }
+    return BOOLEAN_COMPARE_FUNC(!=);  // NOLINT
 }
 
 auto BooleanType::CompareLessThan(const Value &left, const Value &right) const -> CmpBool {
-  assert(GetTypeId() == TypeId::BOOLEAN);
-  assert(left.CheckComparable(right));
-  if (left.IsNull() || right.IsNull()) {
-    return CmpBool::CmpNull;
-  }
-  return BOOLEAN_COMPARE_FUNC(<);  // NOLINT
+    assert(GetTypeId() == TypeId::BOOLEAN);
+    assert(left.CheckComparable(right));
+    if (left.IsNull() || right.IsNull()) {
+        return CmpBool::CmpNull;
+    }
+    return BOOLEAN_COMPARE_FUNC(<);  // NOLINT
 }
 
 auto BooleanType::CompareLessThanEquals(const Value &left, const Value &right) const -> CmpBool {
-  assert(GetTypeId() == TypeId::BOOLEAN);
-  assert(left.CheckComparable(right));
-  if (left.IsNull() || right.IsNull()) {
-    return CmpBool::CmpNull;
-  }
-  return BOOLEAN_COMPARE_FUNC(<=);  // NOLINT
+    assert(GetTypeId() == TypeId::BOOLEAN);
+    assert(left.CheckComparable(right));
+    if (left.IsNull() || right.IsNull()) {
+        return CmpBool::CmpNull;
+    }
+    return BOOLEAN_COMPARE_FUNC(<=);  // NOLINT
 }
 
 auto BooleanType::CompareGreaterThan(const Value &left, const Value &right) const -> CmpBool {
-  assert(GetTypeId() == TypeId::BOOLEAN);
-  assert(left.CheckComparable(right));
-  if (left.IsNull() || right.IsNull()) {
-    return CmpBool::CmpNull;
-  }
-  return BOOLEAN_COMPARE_FUNC(>);  // NOLINT
+    assert(GetTypeId() == TypeId::BOOLEAN);
+    assert(left.CheckComparable(right));
+    if (left.IsNull() || right.IsNull()) {
+        return CmpBool::CmpNull;
+    }
+    return BOOLEAN_COMPARE_FUNC(>);  // NOLINT
 }
 
 auto BooleanType::CompareGreaterThanEquals(const Value &left, const Value &right) const -> CmpBool {
-  assert(GetTypeId() == TypeId::BOOLEAN);
-  assert(left.CheckComparable(right));
-  if (left.IsNull() || right.IsNull()) {
-    return CmpBool::CmpNull;
-  }
-  return BOOLEAN_COMPARE_FUNC(>=);  // NOLINT
+    assert(GetTypeId() == TypeId::BOOLEAN);
+    assert(left.CheckComparable(right));
+    if (left.IsNull() || right.IsNull()) {
+        return CmpBool::CmpNull;
+    }
+    return BOOLEAN_COMPARE_FUNC(>=);  // NOLINT
 }
 
 auto BooleanType::ToString(const Value &val) const -> std::string {
-  assert(GetTypeId() == TypeId::BOOLEAN);
-  if (val.value_.boolean_ == 1) {
-    return "true";
-  }
-  if (val.value_.boolean_ == 0) {
-    return "false";
-  }
-  return "boolean_null";
+    assert(GetTypeId() == TypeId::BOOLEAN);
+    if (val.value_.boolean_ == 1) {
+        return "true";
+    }
+    if (val.value_.boolean_ == 0) {
+        return "false";
+    }
+    return "boolean_null";
 }
 
 void BooleanType::SerializeTo(const Value &val, char *storage) const {
-  *reinterpret_cast<int8_t *>(storage) = val.value_.boolean_;
+    *reinterpret_cast<int8_t *>(storage) = val.value_.boolean_;
 }
 
 // Deserialize a value of the given type from the given storage space.
 auto BooleanType::DeserializeFrom(const char *storage) const -> Value {
-  int8_t val = *reinterpret_cast<const int8_t *>(storage);
-  return {TypeId::BOOLEAN, val};
+    int8_t val = *reinterpret_cast<const int8_t *>(storage);
+    return {TypeId::BOOLEAN, val};
 }
 
 auto BooleanType::Copy(const Value &val) const -> Value { return {TypeId::BOOLEAN, val.value_.boolean_}; }
 
 auto BooleanType::CastAs(const Value &val, const TypeId type_id) const -> Value {
-  switch (type_id) {
-    case TypeId::BOOLEAN:
-      return Copy(val);
-    case TypeId::VARCHAR: {
-      if (val.IsNull()) {
-        return {TypeId::VARCHAR, nullptr, 0, false};
-      }
-      return {TypeId::VARCHAR, val.ToString()};
+    switch (type_id) {
+        case TypeId::BOOLEAN:
+            return Copy(val);
+        case TypeId::VARCHAR: {
+            if (val.IsNull()) {
+                return {TypeId::VARCHAR, nullptr, 0, false};
+            }
+            return {TypeId::VARCHAR, val.ToString()};
+        }
+        default:
+            break;
     }
-    default:
-      break;
-  }
-  throw Exception("BOOLEAN is not coercable to " + Type::TypeIdToString(type_id));
+    throw Exception("BOOLEAN is not coercable to " + Type::TypeIdToString(type_id));
 }
 }  // namespace bustub

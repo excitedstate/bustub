@@ -18,10 +18,10 @@ HashJoinExecutor::HashJoinExecutor(ExecutorContext *exec_ctx, const HashJoinPlan
                                    std::unique_ptr<AbstractExecutor> &&left_child,
                                    std::unique_ptr<AbstractExecutor> &&right_child)
     : AbstractExecutor(exec_ctx) {
-  if (!(plan->GetJoinType() == JoinType::LEFT || plan->GetJoinType() == JoinType::INNER)) {
-    // Note for 2023 Spring: You ONLY need to implement left join and inner join.
-    throw bustub::NotImplementedException(fmt::format("join type {} not supported", plan->GetJoinType()));
-  }
+    if (!(plan->GetJoinType() == JoinType::LEFT || plan->GetJoinType() == JoinType::INNER)) {
+        // Note for 2023 Spring: You ONLY need to implement left join and inner join.
+        throw bustub::NotImplementedException(fmt::format("join type {} not supported", plan->GetJoinType()));
+    }
 }
 
 void HashJoinExecutor::Init() { throw NotImplementedException("HashJoinExecutor is not implemented"); }

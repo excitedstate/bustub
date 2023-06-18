@@ -20,13 +20,13 @@ struct PGCreateStmt;
 namespace bustub {
 
 class CreateStatement : public BoundStatement {
- public:
-  explicit CreateStatement(std::string table, std::vector<Column> columns);
+   public:
+    explicit CreateStatement(std::string table, std::vector<Column> columns);
 
-  std::string table_;
-  std::vector<Column> columns_;
+    std::string table_;
+    std::vector<Column> columns_;
 
-  auto ToString() const -> std::string override;
+    auto ToString() const -> std::string override;
 };
 
 }  // namespace bustub

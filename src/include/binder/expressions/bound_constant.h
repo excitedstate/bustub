@@ -14,14 +14,14 @@ class BoundExpression;
  * A bound constant, e.g., `1`.
  */
 class BoundConstant : public BoundExpression {
- public:
-  explicit BoundConstant(const Value &val) : BoundExpression(ExpressionType::CONSTANT), val_(val) {}
+   public:
+    explicit BoundConstant(const Value &val) : BoundExpression(ExpressionType::CONSTANT), val_(val) {}
 
-  auto ToString() const -> std::string override { return val_.ToString(); }
+    auto ToString() const -> std::string override { return val_.ToString(); }
 
-  auto HasAggregation() const -> bool override { return false; }
+    auto HasAggregation() const -> bool override { return false; }
 
-  /** The constant being bound. */
-  Value val_;
+    /** The constant being bound. */
+    Value val_;
 };
 }  // namespace bustub

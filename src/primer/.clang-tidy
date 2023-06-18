@@ -1,5 +1,5 @@
 ---
-Checks:     '
+Checks: '
             -modernize-use-trailing-return-type,
             '
 InheritParentConfig: true

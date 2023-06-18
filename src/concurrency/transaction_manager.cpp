@@ -23,18 +23,18 @@
 namespace bustub {
 
 void TransactionManager::Commit(Transaction *txn) {
-  // Release all the locks.
-  ReleaseLocks(txn);
+    // Release all the locks.
+    ReleaseLocks(txn);
 
-  txn->SetState(TransactionState::COMMITTED);
+    txn->SetState(TransactionState::COMMITTED);
 }
 
 void TransactionManager::Abort(Transaction *txn) {
-  /* TODO: revert all the changes in write set */
+    /* TODO: revert all the changes in write set */
 
-  ReleaseLocks(txn);
+    ReleaseLocks(txn);
 
-  txn->SetState(TransactionState::ABORTED);
+    txn->SetState(TransactionState::ABORTED);
 }
 
 void TransactionManager::BlockAllTransactions() { UNIMPLEMENTED("block is not supported now!"); }
