@@ -18,6 +18,7 @@
 .sw?
 # vscode settings directory
 .vscode
+.VSCodeCounter
 #OS X specific files.
 .DS_store
 # Core files
